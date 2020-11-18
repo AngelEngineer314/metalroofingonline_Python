@@ -1,0 +1,64 @@
+<html>
+	{% load static %}
+	<div class='col-12 mt-5'>
+		<div class='row'>
+			<div class='col-lg-3 col-sm-12'>
+				<img src="{% static 'img/logo.png' %}" alt="Smiley face" height="150" width="150">
+			</div>
+			<div class='col-lg-5 col-sm-12'>
+			<h2>INVOICE</h2>
+			<hr>
+			Invoice Number: <strong>{{ order.order_id }}</strong>
+			<br/>
+			Invoice Status: <strong>{{ order.status|title }}</strong>
+			<br/>
+			Invoice Date: {{ order.timestamp }}
+			</div>
+			<div class='col-lg-4 col-sm-12'>
+				<h2>Metal Roofing Online</h2>
+				<hr>
+				Contact@metalroofingonline.com<br/>
+				1-800-555-555<br/>
+				48 Watt Road,<br/>
+				Mornington, 3000<br/>
+				Victoria, Australia
+			</div>
+		</div>
+
+		<div class='row-12 mt-3'>
+	<!-- 		<div class='row-12'>
+				{{order.first_name}}
+				{{order.last_name}}
+				Shipping address Line 1: {{order.shipping_address.address_line_1}}
+				Billing address Line 1: {{order.billing_address.address_line_1}}
+				status: {{order.status}}
+				shipping_total: {{order.shipping_total}}
+				total: {{order.total}}
+			</div> -->
+
+			<table class="table">
+			  <thead class="thead-light">
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Name</th>
+			      <th scope="col">Colour</th>
+			      <th scope="col">Length</th>
+			      <th scope="col">Qty</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for item in order.orderitem_set.all %}
+				  	<tr>
+				  		<th scope="row">{{ forloop.counter }}</th>
+				  		<td>{{ item.product.title }}</td>
+				  		<td>{{ item.colour }}</td>
+				  		<td>{{ item.length }}</td>
+				  		<td>{{ item.quantity }}</td>
+				  	</tr>
+				{% endfor %}
+			  </tbody>
+			</table>
+		</div>
+
+	</div>
+</html>
